@@ -1,0 +1,37 @@
+name: three-router-lab
+
+# management network configuration
+mgmt:
+  network: mgmt
+  ipv4-subnet: 192.100.100.0/24
+
+# the topology section defines the nodes and links in the lab
+topology:
+  kinds:
+    nokia_srlinux:
+      type: ixr-d2l
+      image: ghcr.io/nokia/srlinux:26.3.2
+
+  nodes:
+    r1:
+      kind: nokia_srlinux
+      startup-config: startup-config/r1.cli
+      mgmt-ipv4: 192.100.100.101
+
+    r2:
+      kind: nokia_srlinux
+      type: ixr-d2l
+      startup-config: startup-config/r2.cli
+      mgmt-ipv4: 192.100.100.102
+
+    r3:
+      kind: nokia_srlinux
+      type: ixr-d2l
+      startup-config: startup-config/r3.cli
+      mgmt-ipv4: 192.100.100.103
+
+  links:
+    - endpoints: ["r1:ethernet-1/1", "r2:ethernet-1/1"]
+    - endpoints: ["r1:ethernet-1/2", "r3:ethernet-1/1"]
+
+#admin:NokiaSrl1!
