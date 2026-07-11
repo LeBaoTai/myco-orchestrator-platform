@@ -11,17 +11,18 @@ import (
 func main() {
 
 	client, err := gnmi.New(gnmi.Config{
-		Address:  "192.100.100.101:57400",
-		Username: "admin",
-		Password: "NokiaSrl1!",
-		Timeout:  5 * time.Second,
+		Address:    "192.100.100.102:57400",
+		Username:   "admin",
+		Password:   "NokiaSrl1!",
+		Timeout:    5 * time.Second,
+		SkipVerify: true,
 	})
 	if err != nil {
 		panic(err)
 	}
 	defer client.Close()
 
-	hostnamePath, err := gnmi.BuildPath("/system/state/hostname")
+	hostnamePath, err := gnmi.BuildPath("/acl/interfaces/interface[id=*]/interface-ref/state/subinterface")
 	if err != nil {
 		log.Printf("failed to build path: %v", err)
 	}

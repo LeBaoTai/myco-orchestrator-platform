@@ -18,3 +18,19 @@ func jsonUnmarshalVal(val *gnmi.TypedValue, out interface{}) error {
 	}
 	return json.Unmarshal(jsonVal, out)
 }
+
+func parseResponse(res *gnmi.GetResponse, out interface{}) error {
+	if res == nil {
+		return fmt.Errorf("response is nil")
+	}
+
+	for _, notif := range res.GetNotification() {
+		for _, upd := range notif.GetUpdate() {
+			if err := jsonUnmarshalVal(upd.GetVal(), out); err != nil {
+				return fmt.Errorf("failed to unmarshal value: %w", err)
+			}
+		}
+	}
+
+	return nil
+}

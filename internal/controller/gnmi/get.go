@@ -4,7 +4,6 @@ import (
 	"github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Get lấy giá trị tại các path chỉ định, mặc định lấy STATE
 func (c *Client) Get(paths ...*gnmi.Path) (*gnmi.GetResponse, error) {
 	ctx, cancel := c.ctxWithAuth()
 	defer cancel()
@@ -17,7 +16,6 @@ func (c *Client) Get(paths ...*gnmi.Path) (*gnmi.GetResponse, error) {
 	return c.gnmiC.Get(ctx, req)
 }
 
-// GetConfig lấy giá trị config (thay vì state)
 func (c *Client) GetConfig(paths ...*gnmi.Path) (*gnmi.GetResponse, error) {
 	ctx, cancel := c.ctxWithAuth()
 	defer cancel()
