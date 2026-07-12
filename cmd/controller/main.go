@@ -22,14 +22,22 @@ func main() {
 	}
 	defer client.Close()
 
-	hostnamePath, err := gnmi.BuildPath("/acl/interfaces/interface[id=*]/interface-ref/state/subinterface")
+	hostnamePath, err := gnmi.BuildPath("/system/config/hostname")
 	if err != nil {
 		log.Printf("failed to build path: %v", err)
 	}
 
-	res, err := client.Get(hostnamePath)
+	upd, err := gnmi.NewUpdate(hostnamePath, "sd-02")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(res)
+
+	res, err := client.UpdateConfig(upd)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	setResult, err := gnmi.ParseSetResponse(res)
+
+	fmt.Printf("Set result: %v", setResult)
 }
