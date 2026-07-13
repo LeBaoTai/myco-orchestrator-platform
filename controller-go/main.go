@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/LeBaoTai/myco-controller/internal/controller/gnmi"
+	gnmip "github.com/openconfig/gnmi/proto/gnmi"
 )
 
 func main() {
@@ -27,17 +28,19 @@ func main() {
 		log.Printf("failed to build path: %v", err)
 	}
 
-	upd, err := gnmi.NewUpdate(hostnamePath, "sd-02")
+	var listUpdate []*gnmip.Update
+	upd, err := gnmi.NewUpdate(hostnamePath, "sd-hehe")
 	if err != nil {
 		log.Fatal(err)
 	}
+	listUpdate = append(listUpdate, upd)
 
-	res, err := client.UpdateConfig(upd)
+	res, err := client.SetTransaction(nil, listUpdate, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	setResult, err := gnmi.ParseSetResponse(res)
 
-	fmt.Printf("Set result: %v", setResult)
+	fmt.Printf("Set result: %v\n", setResult)
 }

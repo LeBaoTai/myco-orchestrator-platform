@@ -6,6 +6,18 @@ import (
 	"github.com/openconfig/gnmi/proto/gnmi"
 )
 
+func (c *Client) SetTransaction(deletes []*gnmi.Path, updates []*gnmi.Update, replaces []*gnmi.Update) (*gnmi.SetResponse, error) {
+	ctx, cancel := c.ctxWithAuth()
+	defer cancel()
+
+	req := &gnmi.SetRequest{
+		Delete:  deletes,
+		Update:  updates,
+		Replace: replaces,
+	}
+	return c.gnmiC.Set(ctx, req)
+}
+
 func NewUpdate(p *gnmi.Path, value interface{}) (*gnmi.Update, error) {
 	valBytes, err := json.Marshal(value)
 	if err != nil {
