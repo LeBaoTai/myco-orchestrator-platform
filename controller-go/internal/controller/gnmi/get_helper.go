@@ -40,7 +40,7 @@ func ParseTypedValue(val *gnmipb.TypedValue, out interface{}) error {
 	}
 }
 
-func ParseGetResponse(res *gnmipb.GetResponse, out interface{}) error {
+func ParseGetResponse(res *gnmipb.GetResponse, out any) error {
 	if res == nil {
 		return fmt.Errorf("response is nil")
 	}

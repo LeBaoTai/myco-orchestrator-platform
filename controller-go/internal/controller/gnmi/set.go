@@ -18,7 +18,7 @@ func (c *Client) SetTransaction(deletes []*gnmi.Path, updates []*gnmi.Update, re
 	return c.gnmiC.Set(ctx, req)
 }
 
-func NewUpdate(p *gnmi.Path, value interface{}) (*gnmi.Update, error) {
+func NewUpdate(p *gnmi.Path, value any) (*gnmi.Update, error) {
 	valBytes, err := json.Marshal(value)
 	if err != nil {
 		return nil, err

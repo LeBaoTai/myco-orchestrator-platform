@@ -29,7 +29,10 @@ type Config struct {
 }
 
 func New(cfg Config) (*Client, error) {
-	tlsConfig := &tls.Config{InsecureSkipVerify: cfg.SkipVerify}
+	tlsConfig := &tls.Config{
+		InsecureSkipVerify: cfg.SkipVerify,
+		NextProtos:         []string{"h2"},
+	}
 	creds := credentials.NewTLS(tlsConfig)
 
 	conn, err := grpc.NewClient(cfg.Address, grpc.WithTransportCredentials(creds))

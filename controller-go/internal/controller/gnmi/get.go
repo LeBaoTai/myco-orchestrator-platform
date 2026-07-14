@@ -4,7 +4,7 @@ import (
 	"github.com/openconfig/gnmi/proto/gnmi"
 )
 
-func (c *Client) Get(paths ...*gnmi.Path) (*gnmi.GetResponse, error) {
+func (c *Client) GetState(paths ...*gnmi.Path) (*gnmi.GetResponse, error) {
 	ctx, cancel := c.ctxWithAuth()
 	defer cancel()
 
@@ -34,7 +34,7 @@ func (c *Client) GetString(path string) (string, error) {
 		return "", err
 	}
 
-	res, err := c.Get(p)
+	res, err := c.GetState(p)
 	if err != nil {
 		return "", err
 	}
