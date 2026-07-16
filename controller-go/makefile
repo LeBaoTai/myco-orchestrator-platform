@@ -12,16 +12,19 @@ generate-yang:
 		-package_name=oc \
 		-generate_fakeroot \
 		-fakeroot_name=Device \
-		-compress_paths=true \
 		-shorten_enum_leaf_names \
 		-typedef_enum_with_defmod \
 		-exclude_modules=ietf-interfaces \
 		-generate_simple_unions\
 		$(YANG_REPO)/openconfig/interfaces/openconfig-interfaces.yang \
+		$(YANG_REPO)/openconfig/interfaces/openconfig-if-ip.yang \
 		$(YANG_REPO)/openconfig/bgp/openconfig-bgp.yang \
 		$(YANG_REPO)/openconfig/acl/openconfig-acl.yang \
 		$(YANG_REPO)/openconfig/network-instance/openconfig-network-instance.yang \
 		$(YANG_REPO)/openconfig/system/openconfig-system.yang
+
+
+#-compress_paths=true \
 
 .PHONY: verify-yang
 verify-yang: generate-yang
