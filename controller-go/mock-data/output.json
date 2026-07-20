@@ -123,7 +123,7 @@
       }
     },
     "config": {
-      "hostname": "Router-Tester",
+      "hostname": "Router-01",
       "login-banner": "................................................................\n:                  Welcome to Nokia SR Linux!                  :\n:              Open Network OS for the NetOps era.             :\n:                                                              :\n:    This is a freely distributed official container image.    :\n:                      Use it - Share it                       :\n:                                                              :\n: Get started: https://learn.srlinux.dev                       :\n: Container:   https://go.srlinux.dev/container-image          :\n: Docs:        https://doc.srlinux.dev/26-3                    :\n: Rel. notes:  https://doc.srlinux.dev/rnn                     :\n: YANG:        https://yang.srlinux.dev/26.3.2                 :\n: Discord:     https://go.srlinux.dev/discord                  :\n: Contact:     https://go.srlinux.dev/contact-sales            :\n................................................................\n"
     },
     "ssh-server": {
